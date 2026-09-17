@@ -1,0 +1,50 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CGXFC9E7F35C8
+set_global_assignment -name TOP_LEVEL_ENTITY matmul_4x4_systolic
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "24.1std"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/matmul.sv
+set_global_assignment -name SDC_FILE matmul_synth.sdc
+
+# matmul_4x4_systolic is an internal core (wide a_data/b_data/etc buses meant to
+# feed another block, not a chip-level pinout) -- more ports than this device
+# package has physical pins. Mark them virtual so the fitter places/routes and
+# times the internal logic without trying to assign real I/O pin locations.
+# (a blanket "-to *" is silently ignored by the fitter -- list ports explicitly)
+set_instance_assignment -name VIRTUAL_PIN ON -to clk
+set_instance_assignment -name VIRTUAL_PIN ON -to reset
+set_instance_assignment -name VIRTUAL_PIN ON -to pe_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to start_mat_mul
+set_instance_assignment -name VIRTUAL_PIN ON -to done_mat_mul
+set_instance_assignment -name VIRTUAL_PIN ON -to address_mat_a[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to address_mat_b[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to address_mat_c[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to address_stride_a[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to address_stride_b[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to address_stride_c[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to a_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to b_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to a_data_in[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to b_data_in[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to c_data_in[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to c_data_out[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to a_data_out[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to b_data_out[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to a_addr[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to b_addr[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to c_addr[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to c_data_available
+set_instance_assignment -name VIRTUAL_PIN ON -to validity_mask_a_rows[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to validity_mask_a_cols_b_rows[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to validity_mask_b_cols[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to final_mat_mul_size[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to a_loc[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to b_loc[*]
+
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+
+set_global_assignment -name LAST_QUARTUS_VERSION "24.1std.0 Lite Edition"

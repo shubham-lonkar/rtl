@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Wed Sep 16 16:36:53 2026
+Quartus Prime Version : 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+Revision Name : matmul_synth_fastgrade
+Top-level Entity Name : matmul_4x4_systolic
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 891
+Total pins : 0
+Total virtual pins : 382
+Total block memory bits : 0
+Total DSP Blocks : 16
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

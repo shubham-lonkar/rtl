@@ -1,0 +1,135 @@
+----------------
+; Command Info ;
+----------------
+Report Timing: Found 1 setup paths (1 violated).  Worst case slack is -0.462 
+
+Tcl Command:
+    report_timing -setup -file crit_path_report.txt -panel_name {Worst Setup Path} -from_clock [get_clocks {clk}] -to_clock [get_clocks {clk}] -npaths 1 -detail full_path
+
+Options:
+    -from_clock [get_clocks {clk}] 
+    -to_clock [get_clocks {clk}] 
+    -setup 
+    -npaths 1 
+    -detail full_path 
+    -panel_name {Worst Setup Path} 
+    -file {crit_path_report.txt} 
+
+Delay Model:
+    Slow 1100mV 85C Model
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Summary of Paths                                                                                                                                                                                                                                                           ;
++--------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                                    ; To Node                                                                                      ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -0.462 ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ; clk          ; clk         ; 10.000       ; -0.106     ; 10.296     ;
++--------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+Path #1: Setup slack is -0.462 (VIOLATED)
+===============================================================================
++-------------------------------------------------------------------------------------------------------------------+
+; Path Summary                                                                                                      ;
++--------------------+----------------------------------------------------------------------------------------------+
+; Property           ; Value                                                                                        ;
++--------------------+----------------------------------------------------------------------------------------------+
+; From Node          ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ;
+; To Node            ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ;
+; Launch Clock       ; clk                                                                                          ;
+; Latch Clock        ; clk                                                                                          ;
+; Data Arrival Time  ; 16.784                                                                                       ;
+; Data Required Time ; 16.322                                                                                       ;
+; Slack              ; -0.462 (VIOLATED)                                                                            ;
++--------------------+----------------------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------------+
+; Statistics                                                                         ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Property               ; Value  ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Setup Relationship     ; 10.000 ;       ;             ;            ;       ;       ;
+; Clock Skew             ; -0.106 ;       ;             ;            ;       ;       ;
+; Data Delay             ; 10.296 ;       ;             ;            ;       ;       ;
+; Number of Logic Levels ;        ; 8     ;             ;            ;       ;       ;
+; Physical Delays        ;        ;       ;             ;            ;       ;       ;
+;  Arrival Path          ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 2     ; 5.457       ; 84         ; 2.721 ; 2.736 ;
+;    Cell                ;        ; 2     ; 1.031       ; 16         ; 0.376 ; 0.655 ;
+;   Data                 ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 12    ; 4.737       ; 46         ; 0.000 ; 1.186 ;
+;    Cell                ;        ; 13    ; 5.559       ; 54         ; 0.000 ; 0.876 ;
+;    uTco                ;        ; 1     ; 0.000       ; 0          ; 0.000 ; 0.000 ;
+;  Required Path         ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 2     ; 2.954       ; 76         ; 0.363 ; 2.591 ;
+;    Cell                ;        ; 2     ; 0.931       ; 24         ; 0.345 ; 0.586 ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Data Arrival Path                                                                                                                                             ;
++----------+---------+----+------+--------+----------------------+----------------------------------------------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location             ; Element                                                                                      ;
++----------+---------+----+------+--------+----------------------+----------------------------------------------------------------------------------------------+
+; 0.000    ; 0.000   ;    ;      ;        ;                      ; launch edge time                                                                             ;
+; 6.488    ; 6.488   ;    ;      ;        ;                      ; clock path                                                                                   ;
+;   0.000  ;   0.000 ;    ;      ;        ;                      ; source latency                                                                               ;
+;   0.000  ;   0.000 ;    ;      ; 1      ; LABCELL_X120_Y58_N12 ; clk                                                                                          ;
+;   2.736  ;   2.736 ; RR ; IC   ; 1      ; CLKCTRL_G11          ; clk~CLKENA0|inclk                                                                            ;
+;   3.112  ;   0.376 ; RR ; CELL ; 891    ; CLKCTRL_G11          ; clk~CLKENA0|outclk                                                                           ;
+;   5.833  ;   2.721 ; RR ; IC   ; 1      ; FF_X66_Y58_N14       ; u_systolic_pe_matrix|pe21|mac_unit|acc_reg[5]|clk                                            ;
+;   6.488  ;   0.655 ; RR ; CELL ; 1      ; FF_X66_Y58_N14       ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ;
+; 16.784   ; 10.296  ;    ;      ;        ;                      ; data path                                                                                    ;
+;   6.488  ;   0.000 ;    ; uTco ; 1      ; FF_X66_Y58_N14       ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ;
+;   6.488  ;   0.000 ; FF ; CELL ; 13     ; FF_X66_Y58_N14       ; u_systolic_pe_matrix|pe21|mac_unit|acc_reg[5]|q                                              ;
+;   7.268  ;   0.780 ; FF ; IC   ; 1      ; LABCELL_X67_Y58_N36  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|LessThan0~1|datab                                   ;
+;   7.945  ;   0.677 ; FR ; CELL ; 3      ; LABCELL_X67_Y58_N36  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|LessThan0~1|combout                                 ;
+;   8.230  ;   0.285 ; RR ; IC   ; 1      ; LABCELL_X67_Y58_N42  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|LessThan0~4|dataa                                   ;
+;   8.929  ;   0.699 ; RF ; CELL ; 12     ; LABCELL_X67_Y58_N42  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|LessThan0~4|combout                                 ;
+;   10.115 ;   1.186 ; FF ; IC   ; 1      ; MLABCELL_X68_Y60_N3  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|ShiftRight0~3|datae                                 ;
+;   10.469 ;   0.354 ; FF ; CELL ; 2      ; MLABCELL_X68_Y60_N3  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|ShiftRight0~3|combout                               ;
+;   10.866 ;   0.397 ; FF ; IC   ; 1      ; LABCELL_X67_Y60_N54  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|ShiftRight0~5|datac                                 ;
+;   11.443 ;   0.577 ; FF ; CELL ; 1      ; LABCELL_X67_Y60_N54  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|ShiftRight0~5|combout                               ;
+;   11.718 ;   0.275 ; FF ; IC   ; 2      ; LABCELL_X67_Y60_N33  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~17|datad                                       ;
+;   12.594 ;   0.876 ; FR ; CELL ; 1      ; LABCELL_X67_Y60_N33  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~17|cout                                        ;
+;   12.594 ;   0.000 ; RR ; IC   ; 2      ; LABCELL_X67_Y60_N36  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~21|cin                                         ;
+;   12.648 ;   0.054 ; RR ; CELL ; 1      ; LABCELL_X67_Y60_N36  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~21|cout                                        ;
+;   12.648 ;   0.000 ; RR ; IC   ; 2      ; LABCELL_X67_Y60_N39  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~13|cin                                         ;
+;   12.648 ;   0.000 ; RR ; CELL ; 1      ; LABCELL_X67_Y60_N39  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~13|cout                                        ;
+;   12.648 ;   0.000 ; RR ; IC   ; 2      ; LABCELL_X67_Y60_N42  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~9|cin                                          ;
+;   13.068 ;   0.420 ; RR ; CELL ; 9      ; LABCELL_X67_Y60_N42  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|Add5~9|sumout                                       ;
+;   13.416 ;   0.348 ; RR ; IC   ; 1      ; LABCELL_X67_Y60_N12  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|NormShift[0]~0|datad                                ;
+;   13.997 ;   0.581 ; RF ; CELL ; 6      ; LABCELL_X67_Y60_N12  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|NormShift[0]~0|combout                              ;
+;   15.128 ;   1.131 ; FF ; IC   ; 1      ; LABCELL_X66_Y58_N48  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|NormE[1]~0|datad                                    ;
+;   15.568 ;   0.440 ; FR ; CELL ; 1      ; LABCELL_X66_Y58_N48  ; u_systolic_pe_matrix|pe21|mac_unit|add_i|NormE[1]~0|combout                                  ;
+;   15.903 ;   0.335 ; RR ; IC   ; 1      ; LABCELL_X66_Y58_N12  ; u_systolic_pe_matrix|pe21|mac_unit|acc_reg[5]~21|datac                                       ;
+;   16.477 ;   0.574 ; RF ; CELL ; 1      ; LABCELL_X66_Y58_N12  ; u_systolic_pe_matrix|pe21|mac_unit|acc_reg[5]~21|combout                                     ;
+;   16.477 ;   0.000 ; FF ; IC   ; 1      ; FF_X66_Y58_N14       ; u_systolic_pe_matrix|pe21|mac_unit|acc_reg[5]|d                                              ;
+;   16.784 ;   0.307 ; FF ; CELL ; 1      ; FF_X66_Y58_N14       ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ;
++----------+---------+----+------+--------+----------------------+----------------------------------------------------------------------------------------------+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Data Required Path                                                                                                                                            ;
++----------+---------+----+------+--------+----------------------+----------------------------------------------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location             ; Element                                                                                      ;
++----------+---------+----+------+--------+----------------------+----------------------------------------------------------------------------------------------+
+; 10.000   ; 10.000  ;    ;      ;        ;                      ; latch edge time                                                                              ;
+; 16.382   ; 6.382   ;    ;      ;        ;                      ; clock path                                                                                   ;
+;   10.000 ;   0.000 ;    ;      ;        ;                      ; source latency                                                                               ;
+;   10.000 ;   0.000 ;    ;      ; 1      ; LABCELL_X120_Y58_N12 ; clk                                                                                          ;
+;   10.363 ;   0.363 ; RR ; IC   ; 1      ; CLKCTRL_G11          ; clk~CLKENA0|inclk                                                                            ;
+;   10.708 ;   0.345 ; RR ; CELL ; 891    ; CLKCTRL_G11          ; clk~CLKENA0|outclk                                                                           ;
+;   13.299 ;   2.591 ; RR ; IC   ; 1      ; FF_X66_Y58_N14       ; u_systolic_pe_matrix|pe21|mac_unit|acc_reg[5]|clk                                            ;
+;   13.885 ;   0.586 ; RR ; CELL ; 1      ; FF_X66_Y58_N14       ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ;
+;   16.382 ;   2.497 ;    ;      ;        ;                      ; clock pessimism removed                                                                      ;
+; 16.322   ; -0.060  ;    ;      ;        ;                      ; clock uncertainty                                                                            ;
+; 16.322   ; 0.000   ;    ; uTsu ; 1      ; FF_X66_Y58_N14       ; systolic_pe_matrix:u_systolic_pe_matrix|processing_element:pe21|MAC_E3M4:mac_unit|acc_reg[5] ;
++----------+---------+----+------+--------+----------------------+----------------------------------------------------------------------------------------------+
+
+----------------------------
+; Extra Fitter Information ;
+----------------------------
+HTML report is unavailable in plain text report export.
+
+
